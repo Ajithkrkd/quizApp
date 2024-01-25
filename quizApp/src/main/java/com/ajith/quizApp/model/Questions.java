@@ -19,7 +19,7 @@ public class Questions {
     private String option3;
     private String option4;
     private String rightAnswer;
-    private String Category;
+    private String category;
     private String level;
 
 
