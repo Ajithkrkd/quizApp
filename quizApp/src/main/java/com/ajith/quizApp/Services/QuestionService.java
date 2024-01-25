@@ -14,4 +14,6 @@ public interface QuestionService {
      List< Question > getAllQuestions ( );
 
     ResponseEntity < Question> getQuestionById (Integer id);
+
+    ResponseEntity< List< Question>> getALllQuestionsByCategory (String categoryName);
 }

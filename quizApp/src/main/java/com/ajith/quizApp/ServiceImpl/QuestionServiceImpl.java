@@ -1,6 +1,6 @@
 package com.ajith.quizApp.ServiceImpl;
 
-import com.ajith.quizApp.Dao.QuestionRepository;
+import com.ajith.quizApp.Dao.QuestionDao;
 import com.ajith.quizApp.Services.QuestionService;
 import com.ajith.quizApp.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,26 @@ import java.util.Optional;
 @Service
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionDao questionDao;
 
     @Override
     public Question createQuestion (Question question) {
-        return questionRepository.save(question);
+        return questionDao.save(question);
     }
 
     @Override
     public  List < Question > getAllQuestions ( ) {
-        return  questionRepository.findAll ();
+        return  questionDao.findAll ();
     }
 
     @Override
     public ResponseEntity<Question> getQuestionById (Integer id) {
-        Optional < Question > question = questionRepository.findById(id);
+        Optional < Question > question = questionDao.findById(id);
          return ResponseEntity.status ( HttpStatus.OK).body (question.get ());
+    }
+
+    @Override
+    public ResponseEntity < List < Question > > getALllQuestionsByCategory (String categoryName) {
+        return ResponseEntity.status ( HttpStatus.OK).body ( questionDao.findAllByCategory (categoryName));
     }
 }
